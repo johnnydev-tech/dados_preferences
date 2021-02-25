@@ -24,13 +24,17 @@ class _HomeState extends State<Home> {
   _exibir() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _textoSalvo = prefs.getString("dados");
+      _textoSalvo = prefs.getString("dados") ?? "Sem Valor";
     });
     print("Exibir: " + _textoSalvo);
   }
 
   //Remover dados em Cache
-  _remover() {}
+  _remover() async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove("dados");
+    print("Removido");
+  }
 
   @override
   Widget build(BuildContext context) {
